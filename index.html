@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Slide Show</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="arrow l" onclick="prev()">
+            <img src="img/l.png" alt="l">
+        </div>
+        <div class="slide slide-1">
+             <div class="caption">
+                 <h3>New York</h3>
+                 <p>We love the Big Apple!</p>
+             </div>
+        </div>
+        <div class="slide slide-2">
+            <div class="caption">
+                <h3>Los Angeles</h3>
+                <p>LA is always so much fun!</p>
+            </div>
+       </div>
+       <div class="slide slide-3">
+            <div class="caption">
+                <h3>Bahar Dar</h3>
+                <p>Thank you, Bahar Dar!</p>
+            </div>
+       </div>
+       <div class="arrow r" onclick="next()">
+            <img src="img/r.png" alt="r">
+        </div>
+    </div>
+
+    <script>
+        let slide = document.querySelectorAll('.slide');
+        var current = 0;
+
+        function cls(){
+            for(let i = 0; i < slide.length; i++){
+                  slide[i].style.display = 'none';
+            }
+        }
+
+        function next(){
+            cls();
+            if(current === slide.length-1) current = -1;
+            current++;
+
+            slide[current].style.display = 'block';
+            slide[current].style.opacity = 0.4;
+
+            var x = 0.4;
+            var intX = setInterval(function(){
+                x+=0.1;
+                slide[current].style.opacity = x;
+                if(x >= 1) {
+                    clearInterval(intX);
+                    x = 0.4;
+                }
+            }, 100);
+
+        }
+
+        function prev(){
+            cls();
+            if(current === 0) current = slide.length;
+            current--;
+
+            slide[current].style.display = 'block';
+            slide[current].style.opacity = 0.4;
+
+            var x = 0.4;
+            var intX = setInterval(function(){
+                x+=0.1;
+                slide[current].style.opacity = x;
+                if(x >= 1) {
+                    clearInterval(intX);
+                    x = 0.4;
+                }
+            }, 100);
+
+        }
+
+        function start(){
+            cls();
+            slide[current].style.display = 'block';
+        }
+        start();
+    </script>
+</body>
+</html>
